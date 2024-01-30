@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MonkeysMVVM.ViewModels"
+             x:DataType="viewmodel:FindMonkeyByLocationPageViewModel"
              x:Class="MonkeysMVVM.Views.FindMonkeyByLocationPage"
              Title="FindMonkeyByLocationPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <StackLayout>
+            <Entry Placeholder="Enter Country Name" PlaceholderColor="Gray" Text="{Binding Country}"/>
+            <Button Text="Search" Command="{Binding SearchByCountryCommand}" WidthRequest="100" HeightRequest="50" CornerRadius="100"/>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Number of monkeys found: " FontAttributes="Bold"/>
+                        <Span Text="{Binding Count}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Text="{Binding Name}"/>
+            <Border WidthRequest="200" HeightRequest="200">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="100"/>
+                </Border.StrokeShape>
+            <Image Source="{Binding ImgaeUrl}"/>
+            </Border>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
