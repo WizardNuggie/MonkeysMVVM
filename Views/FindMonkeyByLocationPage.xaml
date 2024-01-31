@@ -18,11 +18,11 @@
                 </Label.FormattedText>
             </Label>
             <Label Text="{Binding Name}"/>
-            <Border WidthRequest="200" HeightRequest="200">
+            <Border WidthRequest="200" HeightRequest="200" StrokeThickness="0">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="100"/>
                 </Border.StrokeShape>
-            <Image Source="{Binding ImgaeUrl}"/>
+            <Image Source="{Binding ImgaeUrl}" Aspect="AspectFill"/>
             </Border>
         </StackLayout>
     </ScrollView>

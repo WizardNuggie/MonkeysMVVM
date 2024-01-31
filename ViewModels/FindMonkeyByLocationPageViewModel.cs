@@ -1,4 +1,5 @@
 ﻿using MonkeysMVVM.Models;
+using MonkeysMVVM.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,26 @@ namespace MonkeysMVVM.ViewModels
         public FindMonkeyByLocationPageViewModel()
         {
             monkey = new Monkey() { Name="No monkeys for now"};
-            SearchByCountryCommand = new Command(FindMonkeys, () => country != null && country != string.Empty);
+            SearchByCountryCommand = new Command(FindMonkeys, () => !string.IsNullOrEmpty(country));
         }
         private void FindMonkeys()
         {
-            
+            MonkeysService service = new MonkeysService();
+            List<Monkey> lst = service.FindMonkeyByLocation(country);
+            if (lst.Count > 0)
+                monkey = lst[0];
+            else
+            {
+                monkey = new Monkey() { Name = "No monkeys for now"};
+            }
+            Count = lst.Count;
+            RefreshData();
+            Country = null;
+        }
+        private void RefreshData()
+        {
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(ImgaeUrl));
         }
     }
 }
